@@ -42,14 +42,15 @@ Anything in `public/` is served at the site root, so `public/assets/x` is linked
 
 Placeholders show as grey highlights (`<mark class="todo">`) or grey boxes.
 
-1. **CV.** Add the PDF at `public/assets/Maks-Mroczkowski-CV.pdf`. The nav's "CV" link and "Download CV (PDF)" on both pages already point there.
-2. **#EatABRHack video** (Home, "The other side of the table"). Add `public/assets/eatabrhack.mp4`; the play button swaps in a real player. Replace the grey still with a poster frame.
-3. **Three #EatABRHack photos** with their captions, in the same chapter.
-4. **One line on what Maks looked for as a judge**, in the same chapter.
-5. **Portrait** (black and white, 4:5) in "Where I am now".
-6. **The rest of the "Where I am now" sentence.**
+1. **#EatABRHack video** (Home, "The other side of the table"). Add `public/assets/eatabrhack.mp4`; the play button swaps in a real player. Replace the grey still with a poster frame.
+2. **Three #EatABRHack photos** with their captions, in the same chapter.
+3. **One line on what Maks looked for as a judge**, in the same chapter.
+4. **Portrait** (black and white, 4:5) in "Where I am now".
+5. **The rest of the "Where I am now" sentence.**
 
 Nice to have: a favicon and a social preview image (`og:image`).
+
+The CV is at `public/assets/Maks-Mroczkowski-CV.pdf`. To update it, replace that file and keep the name, since the nav's "CV" link and "Download CV (PDF)" on both pages point there.
 
 ## Design rules
 
