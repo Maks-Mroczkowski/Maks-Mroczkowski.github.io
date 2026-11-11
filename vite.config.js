@@ -1,9 +1,17 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite' 
 
+// The site is two static pages. index.html and projects.html are the entry
+// points; css/, js/ and assets/ live in public/ and are copied to dist/
+// unchanged, so the built site is byte-for-byte the approved design.
+// Vite prints "can't be bundled" / "doesn't exist at build time" notices for
+// those files during the build; that is expected.
+//
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
   base: "/Maks_Mroczkowski_Portfolio/",
+  build: {
+    rollupOptions: {
+      input: { index: 'index.html', projects: 'projects.html' },
+    },
+  },
 });

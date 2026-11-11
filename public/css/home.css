@@ -1,0 +1,149 @@
+/* Maks Mroczkowski: Home */
+body{margin:0}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+a{color:#000}
+a:hover{color:#000}
+
+/* Base */
+.site{container:site/inline-size;min-height:100vh;background:#F2F2F0;color:#000;font-family:'Libre Franklin','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:400;font-kerning:normal;font-variant-numeric:lining-nums;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.frame{--paper:#F2F2F0;--ink:#000;--graphite:#666662;--signal:#E84600;--track:#D6D6D2;--edge:#B5B5B0;--text-x:clamp(112px,11.1cqw,176px);--line-x:calc(var(--text-x) - 56px);--pad-r:clamp(48px,5.56cqw,96px);--story-shift:clamp(96px,10.4cqw,200px);--story-x:calc(var(--text-x) + var(--story-shift));--gut:24px;--rule:2px;--dot:14px;--bar-h:64px;--open-pt:104px;--pad-b:128px;--hl-fs:clamp(40px,5.6cqw,88px);--body-fs:clamp(18px,1.39cqw,20px);--yr-fs:clamp(22px,1.95cqw,28px);--ch-px:0px;--ch-py:0px;position:relative}
+.frame ::selection{background:var(--track);color:var(--ink)}
+.frame a{color:var(--ink)}
+.frame a:focus-visible,.frame button:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
+.frame [id]{scroll-margin-top:calc(var(--bar-h) + 24px)}
+.skip{position:absolute;left:var(--text-x);top:10px;z-index:50;padding:10px 14px;background:var(--ink);font-size:15px;font-weight:600;text-decoration:none;transform:translateY(-200%)}
+.frame .skip{color:var(--paper)}
+.skip:focus{transform:none}
+
+/* The floating pill nav, inset from the edges; the margin line runs past its left end */
+.frame[data-nav="pill"]{--bar-h:88px}
+.frame[data-nav="pill"] .rule{top:calc(-1 * var(--bar-h))}
+.fnav-wrap{position:sticky;top:0;z-index:30;box-sizing:border-box;height:var(--bar-h);padding:16px calc(var(--pad-r) - 32px) 8px calc(var(--text-x) - 32px);pointer-events:none}
+.fnav-wrap::before{content:"";position:absolute;top:0;right:0;bottom:0;left:calc(var(--text-x) - 32px);z-index:-1;background:var(--paper);pointer-events:auto}
+.fnav{box-sizing:border-box;height:64px;display:flex;align-items:center;justify-content:space-between;column-gap:24px;padding:0 31px;border:1px solid var(--track);border-radius:999px;background:var(--paper);pointer-events:auto}
+.fnav-id{display:flex;align-items:center;column-gap:14px;min-width:0;white-space:nowrap}
+.fnav-name{display:inline-flex;align-items:center;min-height:44px;font-size:16px;font-weight:600;letter-spacing:-0.01em;text-decoration:none}
+.fnav-sep{display:block;flex:none;width:1px;height:18px;background:var(--track)}
+.fnav-loc{font-size:16px;font-weight:400;color:var(--graphite)}
+.fnav-links{display:flex;align-items:center;column-gap:clamp(24px,3.4cqw,52px);margin:0;padding:0;list-style:none}
+.fnav-links a{display:inline-flex;align-items:center;min-height:44px;font-size:16px;font-weight:500;text-decoration:none}
+.fnav-name:hover,.fnav-links a:hover,.fnav-links a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:6px}
+
+/* Page, grid and the margin line */
+.page{position:relative;display:block;padding:0 var(--pad-r) var(--pad-b) var(--text-x)}
+.rule{position:absolute;left:var(--line-x);top:0;bottom:calc(var(--pad-b) - 40px);width:var(--rule);background:var(--track);pointer-events:none}
+.rule-drawn{position:absolute;left:0;top:0;width:100%;height:100%;background:var(--signal)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);max-width:1600px}
+.main-col{grid-column:1/span 7;min-width:0}
+.side-col{grid-column:8/span 5;min-width:0}
+/* The text sits further in than the line, a step towards the centre; the line and its dots stay in the margin */
+.shift{margin-left:var(--story-shift)}
+.story{max-width:min(47.9cqw,760px)}
+.dot{position:absolute;left:calc(var(--line-x) - var(--story-x) + var(--ch-px) + var(--rule) / 2 - var(--dot) / 2);top:calc(var(--ch-py) + 0.7em - var(--dot) / 2);width:var(--dot);height:var(--dot);box-sizing:border-box;border-radius:50%;border:2px solid var(--track);background:var(--paper);transition:background-color .2s ease,border-color .2s ease}
+.dot.on{border-color:var(--signal);background:var(--signal)}
+
+/* The year: a quiet label beside the line, level with the chapter it belongs to; it darkens when the line reaches it */
+.yr-tag{position:absolute;left:calc(var(--line-x) - var(--story-x) + var(--ch-px) + 34px);top:calc(var(--ch-py) + 11.2px - var(--yr-fs) / 2);display:flex;font-size:var(--yr-fs);line-height:1;font-weight:700;letter-spacing:-0.015em;font-variant-numeric:tabular-nums lining-nums;font-feature-settings:"tnum" 1,"lnum" 1;white-space:nowrap;color:var(--track);transition:color .3s ease;user-select:none;-webkit-user-select:none}
+.yr-tag.on{color:var(--graphite)}
+.hl .yr-tag{top:calc(0.47 * var(--hl-fs) - var(--yr-fs) / 2)}
+.yr-fixed,.odo{display:block;height:1em}
+.odo{overflow:hidden}
+.odo-strip{display:block;transition:transform .55s cubic-bezier(.65,0,.35,1)}
+.odo-strip>span{display:block;height:1em}
+.p3{transform:translateY(0)}
+.p4{transform:translateY(-1em)}
+.p5{transform:translateY(-2em)}
+.p6{transform:translateY(-3em)}
+.site[data-intro="pending"] .odo-strip,.site[data-motion="static"] .odo-strip,.site[data-motion="reduced"] .odo-strip{transition:none}
+.site[data-intro="running"] .odo-strip{transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+
+/* Opening */
+.opening{position:relative;box-sizing:border-box;padding-top:var(--open-pt);min-height:clamp(520px,calc(100svh - var(--bar-h) - 48px),800px)}
+.hl{position:relative;margin:0;font-size:var(--hl-fs);font-weight:900;line-height:0.98;letter-spacing:-0.035em;text-wrap:balance}
+.hl .dot{top:calc(0.47em - var(--dot) / 2)}
+.intro{margin:clamp(20px,2.6cqw,40px) 0 0;font-size:clamp(20px,1.67cqw,24px);line-height:1.42;letter-spacing:-0.005em;max-width:27em;text-wrap:pretty}
+
+/* Chapters */
+.ch{position:relative}
+.slow{margin-top:clamp(120px,15.3cqw,220px)}
+.fast{margin-top:clamp(88px,9.7cqw,140px)}
+.ch-date{margin:0;font-size:clamp(15px,1.11cqw,16px);line-height:1.4;font-weight:500;color:var(--graphite);font-variant-numeric:tabular-nums}
+.ch-title{margin:clamp(6px,0.83cqw,12px) 0 0;font-size:clamp(28px,2.78cqw,40px);font-weight:800;line-height:1.06;letter-spacing:-0.025em;text-wrap:balance}
+.txt{font-size:var(--body-fs);line-height:1.5;max-width:33em;text-wrap:pretty}
+.txt p{margin:0}
+.txt p+p{margin-top:0.6em}
+.frame strong{font-weight:700}
+.ch .txt{margin-top:clamp(14px,1.5cqw,22px)}
+.u{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:0.18em}
+.u:hover{text-decoration-thickness:2px}
+.todo{background:var(--track);color:var(--ink);padding:0.04em 0.2em;border-radius:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* Media placeholders */
+.media{margin:clamp(28px,2.8cqw,40px) 0 0;padding:0}
+.box{position:relative;overflow:hidden;background:var(--track)}
+.box-label{position:absolute;left:12px;top:10px;right:12px;font-size:13px;line-height:1.3;font-weight:500;color:var(--ink)}
+.r169{aspect-ratio:16/9}
+.r11{aspect-ratio:1/1}
+.r45{aspect-ratio:4/5}
+.play{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;padding:0;border:0;border-radius:50%;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.play svg{display:block;width:22px;height:22px;margin-left:4px}
+.player{position:absolute;inset:0;display:flex;align-items:flex-end;padding:16px 18px;background:var(--ink);font-size:14px;line-height:1.4}
+.photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--gut);margin:var(--gut) 0 0;padding:0;list-style:none}
+.photos figure{margin:0}
+.cap{margin:10px 0 0;font-size:15px;line-height:1.4;color:var(--graphite)}
+/* A figure from the paper, on its own white like a printed page */
+.paper-fig{display:block;width:100%;height:auto;box-sizing:border-box;border:1px solid var(--track);border-radius:12px;background:#fff}
+
+/* Where I am now */
+.now{margin-top:clamp(140px,15.3cqw,220px);row-gap:28px}
+.sec-title{margin:0;font-size:clamp(36px,3.9cqw,56px);font-weight:800;line-height:1.04;letter-spacing:-0.03em}
+.now .txt{margin-top:clamp(16px,1.7cqw,24px)}
+
+/* Ending */
+.end{margin-top:clamp(140px,15.3cqw,220px)}
+.end-title{margin:0;font-size:clamp(40px,5.6cqw,88px);font-weight:900;line-height:0.98;letter-spacing:-0.035em;text-wrap:balance}
+.end .txt{margin-top:clamp(18px,2cqw,28px)}
+/* The email sits in the same row as the other links, at the same size */
+.contact{display:block}
+.links{display:flex;flex-wrap:wrap;justify-content:flex-start;align-items:baseline;column-gap:32px;row-gap:0;margin:clamp(28px,3.3cqw,48px) 0 0;padding:0;list-style:none;font-size:17px;font-weight:500}
+.links a{display:inline-block;padding:10px 0;overflow-wrap:anywhere;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:0.2em}
+.links a:hover{text-decoration-thickness:2px}
+
+/* Panels: each chapter, and where I am now, sits in an outlined panel with the nav pill's hairline and rounding. The line, its dots and the years stay in the margin and behave as before; nothing joins them to the panels */
+.frame[data-story="panels"]{--pn-x:44px;--pn-y:36px;--pn-r:28px}
+[data-story="panels"] .ch{--ch-px:var(--pn-x);--ch-py:var(--pn-y);margin:0 calc(-1 * var(--pn-x));padding:var(--pn-y) var(--pn-x) calc(var(--pn-y) + 4px);outline:1.5px solid var(--edge);outline-offset:-1.5px;border-radius:var(--pn-r);background:var(--paper)}
+[data-story="panels"] .ch.slow{margin-top:clamp(64px,6.9cqw,100px)}
+[data-story="panels"] .ch.fast{margin-top:clamp(32px,3.3cqw,48px)}
+[data-story="panels"] .now{margin-left:calc(var(--story-shift) - var(--pn-x));padding:calc(var(--pn-y) + 4px) var(--pn-x);outline:1.5px solid var(--edge);outline-offset:-1.5px;border-radius:var(--pn-r)}
+
+[data-story="panels"] .now{margin-top:clamp(64px,6.9cqw,100px)}
+[data-story="panels"] .end{margin-top:clamp(96px,10.4cqw,150px)}
+
+/* Mobile: one column beside the line; each chapter's own date carries its year */
+@container site (max-width:1023px){
+.frame{--bar-h:90px;--text-x:44px;--line-x:20px;--pad-r:20px;--story-shift:0px;--dot:12px;--open-pt:40px;--pad-b:88px}
+.frame[data-nav="pill"]{--bar-h:104px}
+.fnav-wrap{padding:8px calc(var(--pad-r) - 12px) 6px calc(var(--text-x) - 12px)}
+.fnav-wrap::before{left:calc(var(--text-x) - 12px)}
+.fnav{height:auto;flex-direction:column;align-items:flex-start;justify-content:center;row-gap:0;padding:4px 11px;border-radius:22px}
+.fnav-id{column-gap:10px}
+.fnav-name{min-height:36px}
+.fnav-links{column-gap:22px}
+.grid{grid-template-columns:minmax(0,1fr)}
+.main-col,.side-col{grid-column:1/-1}
+.story{max-width:none}
+.yr-tag{display:none}
+.opening{min-height:clamp(380px,calc(100svh - var(--bar-h) - 160px),500px)}
+.photos{display:flex;column-gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-right:calc(-1 * var(--pad-r));padding-right:var(--pad-r);scrollbar-width:none}
+.photos::-webkit-scrollbar{display:none}
+.photos>li{flex:0 0 72%;scroll-snap-align:start}
+.links{column-gap:18px}
+.frame[data-story="panels"]{--pn-x:16px;--pn-y:24px;--pn-r:20px}
+[data-story="panels"] .ch{--ch-px:0px;margin-left:0;margin-right:-6px}
+[data-story="panels"] .ch.slow{margin-top:56px}
+[data-story="panels"] .ch.fast{margin-top:32px}
+[data-story="panels"] .now{margin-left:0;margin-right:-6px}
+[data-story="panels"] .photos{margin-right:0;padding-right:0}
+}
+@media (prefers-reduced-motion:reduce){.frame *{transition:none !important}}
