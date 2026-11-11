@@ -8,7 +8,9 @@ import { defineConfig } from 'vite'
 //
 // https://vite.dev/config/
 export default defineConfig({
-  base: "/Maks_Mroczkowski_Portfolio/",
+  // Relative base: the pages link to everything with relative URLs, so the
+  // same build works on the custom domain and on the github.io address.
+  base: "./",
   build: {
     rollupOptions: {
       input: { index: 'index.html', projects: 'projects.html' },

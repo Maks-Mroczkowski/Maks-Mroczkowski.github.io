@@ -8,14 +8,22 @@ Two static pages of HTML, CSS and one small script. Vite builds them and copies 
 
 ```
 npm install
-npm run dev       # http://localhost:5173/Maks_Mroczkowski_Portfolio/
+npm run dev       # http://localhost:5173/
 npm run build     # writes dist/
 npm run preview   # serves dist/
 ```
 
 ## Deploy
 
-Pushing to `main` runs `.github/workflows/deploy.yml`, which builds the site and publishes `dist/` to the `gh-pages` branch. GitHub Pages serves that branch. `npm run deploy` does the same from your machine.
+Every push to `main` goes live automatically. `.github/workflows/deploy.yml` builds the site and publishes `dist/` to GitHub Pages, usually within a minute or two. Progress shows on the repo's Actions tab, and "Run workflow" there redeploys without a new commit.
+
+```
+git add -A
+git commit -m "Describe the change"
+git push
+```
+
+Before pushing a visual change, check it against "Done when" below.
 
 ## What's where
 
@@ -59,6 +67,15 @@ Nice to have: a favicon and a social preview image (`og:image`).
 - Each dot fills, and its year label darkens from Track to Graphite, as the line reaches it.
 - Once per browser session, the small year next to the headline spins from 2023 to 2026 while the line draws down to the first dot.
 - On Projects the line is simply drawn in full, with no script.
+
+## Done when
+
+- Both pages look and behave the same as before the change at 1440px and 390px wide, top to bottom.
+- Home works without JavaScript and shows the finished line.
+- The skip link, visible focus styles and every link work from the keyboard.
+- Lighthouse on mobile scores at least 95 for accessibility and 90 for performance.
+- Every link works, including Home's link to `projects.html#client-app-alpha`.
+- Figure 1a keeps its credit line: Zhang et al., npj Digital Surgery (2026), CC BY 4.0, cropped.
 
 ## Notes
 
