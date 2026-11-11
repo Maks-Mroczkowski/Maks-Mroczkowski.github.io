@@ -1,6 +1,6 @@
 # Maks Mroczkowski: personal site
 
-Live at https://maks-mroczkowski.github.io/Maks_Mroczkowski_Portfolio/
+Live at https://maks-mroczkowski.github.io/
 
 Two static pages of HTML, CSS and one small script. Vite builds them and copies them to `dist/` unchanged. There's no framework at runtime and no client-side bundle.
 
