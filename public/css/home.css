@@ -86,11 +86,15 @@ a:hover{color:#000}
 .r169{aspect-ratio:16/9}
 .r11{aspect-ratio:1/1}
 .r45{aspect-ratio:4/5}
+.box>img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
 .play{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;padding:0;border:0;border-radius:50%;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;cursor:pointer}
+/* The play control is a link to the LinkedIn post; keep its icon Paper, not the link colour */
+.frame a.play,.frame a.play:hover{color:var(--paper)}
 .play svg{display:block;width:22px;height:22px;margin-left:4px}
 .player{position:absolute;inset:0;display:flex;align-items:flex-end;padding:16px 18px;background:var(--ink);font-size:14px;line-height:1.4}
-.photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--gut);margin:var(--gut) 0 0;padding:0;list-style:none}
+.photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--gut);margin:var(--gut) 0 0;padding:0;list-style:none}
 .photos figure{margin:0}
+.photos img{display:block;width:100%;height:auto;background:var(--track)}
 .cap{margin:10px 0 0;font-size:15px;line-height:1.4;color:var(--graphite)}
 /* A figure from the paper, on its own white like a printed page */
 .paper-fig{display:block;width:100%;height:auto;box-sizing:border-box;border:1px solid var(--track);border-radius:12px;background:#fff}
