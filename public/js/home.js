@@ -6,7 +6,8 @@
   - With JavaScript, the line draws as you scroll. Its tip sits around the middle
     of the screen, catches up quickly near the top, and speeds up over the last
     screen so the whole line is drawn when you reach the bottom.
-  - Each dot fills, and each year label darkens, as the line reaches it.
+  - Each dot fills, and each year label darkens, as the line reaches it. A dot
+    that fills while you scroll also pops once, with a single ring (.pop).
   - Once per visit (sessionStorage), the small year beside the headline spins
     from 2023 to 2026 while the line draws down to the opening dot.
   - Reduced motion, or a window too tall to scroll, shows the finished state.
@@ -50,12 +51,25 @@
   }
 
   // Dots carry data-dot="key"; the year label for the same chapter carries data-for="key".
-  function setOn(on) {
+  // With pop, a dot that has just been reached pops (see .dot.pop in home.css).
+  function setOn(on, pop) {
     KEYS.forEach(function (k) {
       var els = site.querySelectorAll('[data-dot="' + k + '"], [data-for="' + k + '"]');
-      Array.prototype.forEach.call(els, function (el) { el.classList.toggle('on', !!on[k]); });
+      Array.prototype.forEach.call(els, function (el) {
+        var was = el.classList.contains('on');
+        el.classList.toggle('on', !!on[k]);
+        if (pop && on[k] && !was && el.hasAttribute('data-dot')) {
+          el.classList.remove('pop');
+          void el.offsetWidth; // restart the animation if it is still running
+          el.classList.add('pop');
+        }
+      });
     });
   }
+
+  site.addEventListener('animationend', function (e) {
+    if (e.animationName === 'dot-ring') e.target.classList.remove('pop');
+  });
 
   function allOn() {
     var o = {};
@@ -125,7 +139,7 @@
     var on = { o: 1 };
     var n = 1;
     geo.dots.forEach(function (p) { if (tip >= p.y - 1) { on[p.k] = 1; n++; } });
-    if (force || n !== onCount) { setOn(on); onCount = n; }
+    if (force || n !== onCount) { setOn(on, true); onCount = n; }
   }
 
   function finished(mode) {

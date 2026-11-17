@@ -7,12 +7,13 @@ a:hover{color:#000}
 
 /* Base */
 .site{container:site/inline-size;min-height:100vh;background:#F2F2F0;color:#000;font-family:'Libre Franklin','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:400;font-kerning:normal;font-variant-numeric:lining-nums;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-.frame{--paper:#F2F2F0;--ink:#000;--graphite:#666662;--signal:#E84600;--track:#D6D6D2;--edge:#B5B5B0;--text-x:clamp(112px,11.1cqw,176px);--line-x:calc(var(--text-x) - 56px);--pad-r:clamp(48px,5.56cqw,96px);--story-shift:clamp(96px,10.4cqw,200px);--story-x:calc(var(--text-x) + var(--story-shift));--gut:24px;--rule:2px;--dot:14px;--bar-h:64px;--open-pt:104px;--pad-b:128px;--hl-fs:clamp(40px,5.6cqw,88px);--body-fs:clamp(18px,1.39cqw,20px);--yr-fs:clamp(22px,1.95cqw,28px);--ch-px:0px;--ch-py:0px;position:relative}
+.frame{--paper:#F2F2F0;--ink:#000;--graphite:#666662;--signal:#E84600;--track:#D6D6D2;--edge:#B5B5B0;--text-x:clamp(112px,11.1cqw,176px);--line-x:calc(var(--text-x) - 56px);--pad-r:clamp(48px,5.56cqw,96px);--story-shift:clamp(96px,10.4cqw,200px);--story-x:calc(var(--text-x) + var(--story-shift));--gut:24px;--rule:2px;--dot:14px;--bar-h:64px;--open-pt:104px;--pad-b:128px;--hl-fs:clamp(40px,5.6cqw,88px);--body-fs:clamp(18px,1.39cqw,20px);--yr-fs:clamp(22px,1.95cqw,28px);--ch-px:0px;--ch-py:0px;--out:cubic-bezier(.16,1,.3,1);position:relative}
 .frame ::selection{background:var(--track);color:var(--ink)}
 .frame a{color:var(--ink)}
 .frame a:focus-visible,.frame button:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
+.frame a.play:focus-visible{border-radius:50%}
 .frame [id]{scroll-margin-top:calc(var(--bar-h) + 24px)}
-.skip{position:absolute;left:var(--text-x);top:10px;z-index:50;padding:10px 14px;background:var(--ink);font-size:15px;font-weight:600;text-decoration:none;transform:translateY(-200%)}
+.skip{position:absolute;left:var(--text-x);top:10px;z-index:50;padding:10px 14px;background:var(--ink);font-size:15px;font-weight:600;text-decoration:none;transform:translateY(-200%);transition:transform .25s var(--out)}
 .frame .skip{color:var(--paper)}
 .skip:focus{transform:none}
 
@@ -23,12 +24,14 @@ a:hover{color:#000}
 .fnav-wrap::before{content:"";position:absolute;top:0;right:0;bottom:0;left:calc(var(--text-x) - 32px);z-index:-1;background:var(--paper);pointer-events:auto}
 .fnav{box-sizing:border-box;height:64px;display:flex;align-items:center;justify-content:space-between;column-gap:24px;padding:0 31px;border:1px solid var(--track);border-radius:999px;background:var(--paper);pointer-events:auto}
 .fnav-id{display:flex;align-items:center;column-gap:14px;min-width:0;white-space:nowrap}
-.fnav-name{display:inline-flex;align-items:center;min-height:44px;font-size:16px;font-weight:600;letter-spacing:-0.01em;text-decoration:none}
+.fnav-name{display:inline-flex;align-items:center;min-height:44px;font-size:16px;font-weight:600;letter-spacing:-0.01em}
 .fnav-sep{display:block;flex:none;width:1px;height:18px;background:var(--track)}
 .fnav-loc{font-size:16px;font-weight:400;color:var(--graphite)}
 .fnav-links{display:flex;align-items:center;column-gap:clamp(24px,3.4cqw,52px);margin:0;padding:0;list-style:none}
-.fnav-links a{display:inline-flex;align-items:center;min-height:44px;font-size:16px;font-weight:500;text-decoration:none}
-.fnav-name:hover,.fnav-links a:hover,.fnav-links a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:6px}
+.fnav-links a{display:inline-flex;align-items:center;min-height:44px;font-size:16px;font-weight:500}
+/* The nav underline is always there but transparent; on hover it fades in and settles up into place */
+.fnav-name,.fnav-links a{text-decoration-line:underline;text-decoration-thickness:1.5px;text-underline-offset:10px;text-decoration-color:transparent;transition:text-decoration-color .2s ease,text-underline-offset .35s var(--out)}
+.fnav-name:hover,.fnav-links a:hover,.fnav-links a[aria-current="page"]{text-decoration-color:currentColor;text-underline-offset:6px}
 
 /* Page, grid and the margin line */
 .page{position:relative;display:block;padding:0 var(--pad-r) var(--pad-b) var(--text-x)}
@@ -76,25 +79,28 @@ a:hover{color:#000}
 .frame strong{font-weight:700}
 .ch .txt{margin-top:clamp(14px,1.5cqw,22px)}
 .u{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:0.18em}
+.u{transition:text-decoration-thickness .2s ease}
 .u:hover{text-decoration-thickness:2px}
 .todo{background:var(--track);color:var(--ink);padding:0.04em 0.2em;border-radius:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 
-/* Media placeholders */
+/* Media: photos share Figure 1a's 12px rounding and the portrait's black and white, so they sit in the page rather than on it */
 .media{margin:clamp(28px,2.8cqw,40px) 0 0;padding:0}
-.box{position:relative;overflow:hidden;background:var(--track)}
+.box{position:relative;overflow:hidden;isolation:isolate;border-radius:12px;background:var(--track)}
 .box-label{position:absolute;left:12px;top:10px;right:12px;font-size:13px;line-height:1.3;font-weight:500;color:var(--ink)}
 .r169{aspect-ratio:16/9}
 .r11{aspect-ratio:1/1}
 .r45{aspect-ratio:4/5}
-.box>img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
-.play{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;padding:0;border:0;border-radius:50%;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.box>img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08);transition:filter .6s ease,transform .9s var(--out)}
+.box:focus-within>img{filter:none}
+@media (hover:hover){.box:hover>img{filter:none;transform:scale(1.03)}.box:hover .play{transform:scale(1.08)}}
+.play{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;padding:0;border:0;border-radius:50%;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .35s var(--out)}
+.play:focus-visible{transform:scale(1.08)}
 /* The play control is a link to the LinkedIn post; keep its icon Paper, not the link colour */
 .frame a.play,.frame a.play:hover{color:var(--paper)}
 .play svg{display:block;width:22px;height:22px;margin-left:4px}
 .player{position:absolute;inset:0;display:flex;align-items:flex-end;padding:16px 18px;background:var(--ink);font-size:14px;line-height:1.4}
-.photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--gut);margin:var(--gut) 0 0;padding:0;list-style:none}
+.photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px;margin:16px 0 0;padding:0;list-style:none}
 .photos figure{margin:0}
-.photos img{display:block;width:100%;height:auto;background:var(--track)}
 .cap{margin:10px 0 0;font-size:15px;line-height:1.4;color:var(--graphite)}
 /* A figure from the paper, on its own white like a printed page */
 .paper-fig{display:block;width:100%;height:auto;box-sizing:border-box;border:1px solid var(--track);border-radius:12px;background:#fff}
@@ -111,7 +117,7 @@ a:hover{color:#000}
 /* The email sits in the same row as the other links, at the same size */
 .contact{display:block}
 .links{display:flex;flex-wrap:wrap;justify-content:flex-start;align-items:baseline;column-gap:32px;row-gap:0;margin:clamp(28px,3.3cqw,48px) 0 0;padding:0;list-style:none;font-size:17px;font-weight:500}
-.links a{display:inline-block;padding:10px 0;overflow-wrap:anywhere;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:0.2em}
+.links a{display:inline-block;padding:10px 0;overflow-wrap:anywhere;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:0.2em;transition:text-decoration-thickness .2s ease}
 .links a:hover{text-decoration-thickness:2px}
 
 /* Panels: each chapter, and where I am now, sits in an outlined panel with the nav pill's hairline and rounding. The line, its dots and the years stay in the margin and behave as before; nothing joins them to the panels */
@@ -148,6 +154,33 @@ a:hover{color:#000}
 [data-story="panels"] .ch.slow{margin-top:56px}
 [data-story="panels"] .ch.fast{margin-top:32px}
 [data-story="panels"] .now{margin-left:0;margin-right:-6px}
-[data-story="panels"] .photos{margin-right:0;padding-right:0}
+[data-story="panels"] .photos{margin-right:calc(1.5px - var(--pn-x));padding-right:calc(var(--pn-x) - 1.5px)}
 }
-@media (prefers-reduced-motion:reduce){.frame *{transition:none !important}}
+/* Motion. All of it is skipped with reduced motion, and none of it hides anything without JavaScript */
+@media (prefers-reduced-motion:no-preference){
+/* Moving between Home and Projects: the nav stays put while the page fades through */
+@view-transition{navigation:auto}
+.fnav-wrap{view-transition-name:fnav}
+::view-transition-old(root){animation:vt-out .2s ease-in both}
+::view-transition-new(root){animation:vt-in .55s var(--out) .05s both}
+@keyframes vt-out{to{opacity:0}}
+@keyframes vt-in{from{opacity:0;transform:translate3d(0,12px,0)}}
+/* The line's dot, the headline's year and then the intro arrive in that order */
+.intro{animation:rise .9s var(--out) .25s both}
+@keyframes rise{from{opacity:0;transform:translate3d(0,16px,0)}}
+/* A dot pops, with one ring, when the line reaches it (home.js adds .pop) */
+.dot.pop{animation:dot-pop .5s cubic-bezier(.34,1.56,.64,1)}
+.dot.pop::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid var(--signal);pointer-events:none;animation:dot-ring .9s var(--out) both}
+@keyframes dot-pop{from{transform:scale(.5)}}
+@keyframes dot-ring{from{opacity:.6}to{opacity:0;transform:scale(2.8)}}
+}
+/* Scroll reveals (motion.js): what starts below the fold rises in as it arrives, a beat apart, and photos settle from a slight zoom. Each panel's outline fades in with it */
+@media screen and (prefers-reduced-motion:no-preference){
+[data-story="panels"] .rv-g{outline-color:transparent}
+[data-story="panels"] .rv-g.in{outline-color:var(--edge);transition:outline-color .9s ease}
+.rv-i{opacity:0;transform:translate3d(0,24px,0)}
+.rv-i.in{opacity:1;transform:none;transition:opacity .7s ease var(--rv-d,0s),transform 1s var(--out) var(--rv-d,0s)}
+.rv-i .box>img{transform:scale(1.08)}
+.rv-i.in .box>img{transform:none;transition:transform 1.6s var(--out) var(--rv-d,0s),filter .6s ease}
+}
+@media (prefers-reduced-motion:reduce){.frame *,.frame *::after{transition:none !important;animation:none !important}}

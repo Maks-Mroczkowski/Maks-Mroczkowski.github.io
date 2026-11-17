@@ -7,12 +7,12 @@ a:hover{color:#000}
 
 /* Base (shared with Home) */
 .site{container:site/inline-size;min-height:100vh;background:#F2F2F0;color:#000;font-family:'Libre Franklin','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:400;font-kerning:normal;font-variant-numeric:lining-nums;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-.frame{--paper:#F2F2F0;--ink:#000;--graphite:#666662;--signal:#E84600;--track:#D6D6D2;--edge:#B5B5B0;--text-x:clamp(112px,11.1cqw,176px);--line-x:calc(var(--text-x) - 56px);--pad-r:clamp(48px,5.56cqw,96px);--gut:24px;--rule:2px;--dot:14px;--bar-h:64px;--open-pt:104px;--pad-b:128px;--story-shift:clamp(96px,10.4cqw,200px);--story-x:calc(var(--text-x) + var(--story-shift));--in-x:0px;--pn-x:44px;--pn-y:40px;--pn-r:28px;position:relative}
+.frame{--paper:#F2F2F0;--ink:#000;--graphite:#666662;--signal:#E84600;--track:#D6D6D2;--edge:#B5B5B0;--text-x:clamp(112px,11.1cqw,176px);--line-x:calc(var(--text-x) - 56px);--pad-r:clamp(48px,5.56cqw,96px);--gut:24px;--rule:2px;--dot:14px;--bar-h:64px;--open-pt:104px;--pad-b:128px;--story-shift:clamp(96px,10.4cqw,200px);--story-x:calc(var(--text-x) + var(--story-shift));--in-x:0px;--pn-x:44px;--pn-y:40px;--pn-r:28px;--out:cubic-bezier(.16,1,.3,1);position:relative}
 .frame ::selection{background:var(--track);color:var(--ink)}
 .frame a{color:var(--ink)}
 .frame a:focus-visible,.frame button:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
 .frame [id]{scroll-margin-top:calc(var(--bar-h) + 24px)}
-.skip{position:absolute;left:var(--text-x);top:10px;z-index:50;padding:10px 14px;background:var(--ink);font-size:15px;font-weight:600;text-decoration:none;transform:translateY(-200%)}
+.skip{position:absolute;left:var(--text-x);top:10px;z-index:50;padding:10px 14px;background:var(--ink);font-size:15px;font-weight:600;text-decoration:none;transform:translateY(-200%);transition:transform .25s var(--out)}
 .frame .skip{color:var(--paper)}
 .skip:focus{transform:none}
 
@@ -23,12 +23,14 @@ a:hover{color:#000}
 .fnav-wrap::before{content:"";position:absolute;top:0;right:0;bottom:0;left:calc(var(--text-x) - 32px);z-index:-1;background:var(--paper);pointer-events:auto}
 .fnav{box-sizing:border-box;height:64px;display:flex;align-items:center;justify-content:space-between;column-gap:24px;padding:0 31px;border:1px solid var(--track);border-radius:999px;background:var(--paper);pointer-events:auto}
 .fnav-id{display:flex;align-items:center;column-gap:14px;min-width:0;white-space:nowrap}
-.fnav-name{display:inline-flex;align-items:center;min-height:44px;font-size:16px;font-weight:600;letter-spacing:-0.01em;text-decoration:none}
+.fnav-name{display:inline-flex;align-items:center;min-height:44px;font-size:16px;font-weight:600;letter-spacing:-0.01em}
 .fnav-sep{display:block;flex:none;width:1px;height:18px;background:var(--track)}
 .fnav-loc{font-size:16px;font-weight:400;color:var(--graphite)}
 .fnav-links{display:flex;align-items:center;column-gap:clamp(24px,3.4cqw,52px);margin:0;padding:0;list-style:none}
-.fnav-links a{display:inline-flex;align-items:center;min-height:44px;font-size:16px;font-weight:500;text-decoration:none}
-.fnav-name:hover,.fnav-links a:hover,.fnav-links a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:6px}
+.fnav-links a{display:inline-flex;align-items:center;min-height:44px;font-size:16px;font-weight:500}
+/* The nav underline is always there but transparent; on hover it fades in and settles up into place */
+.fnav-name,.fnav-links a{text-decoration-line:underline;text-decoration-thickness:1.5px;text-underline-offset:10px;text-decoration-color:transparent;transition:text-decoration-color .2s ease,text-underline-offset .35s var(--out)}
+.fnav-name:hover,.fnav-links a:hover,.fnav-links a[aria-current="page"]{text-decoration-color:currentColor;text-underline-offset:6px}
 .page{position:relative;display:block;padding:0 var(--pad-r) var(--pad-b) var(--text-x)}
 .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);max-width:1600px}
 .main-col{grid-column:1/span 7;min-width:0}
@@ -46,7 +48,7 @@ a:hover{color:#000}
 /* The email sits in the same row as the other links, at the same size */
 .contact{display:block}
 .links{display:flex;flex-wrap:wrap;justify-content:flex-start;align-items:baseline;column-gap:32px;row-gap:0;margin:clamp(28px,3.3cqw,48px) 0 0;padding:0;list-style:none;font-size:17px;font-weight:500}
-.links a{display:inline-block;padding:10px 0;overflow-wrap:anywhere;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:0.2em}
+.links a{display:inline-block;padding:10px 0;overflow-wrap:anywhere;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:0.2em;transition:text-decoration-thickness .2s ease}
 .links a:hover{text-decoration-thickness:2px}
 
 /* The line arrives already drawn here and stops just below the last links */
@@ -70,7 +72,7 @@ a:hover{color:#000}
 .fact:last-child{border-bottom:1px solid var(--track)}
 .fact dt{margin:0;font-size:15px;line-height:1.45;font-weight:500;color:var(--graphite)}
 .fact dd{margin:0;font-size:16px;line-height:1.45;font-weight:500;color:var(--ink);overflow-wrap:anywhere}
-.fact a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:0.2em}
+.fact a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:0.2em;transition:text-decoration-thickness .2s ease}
 .fact a:hover{text-decoration-thickness:2px}
 /* The paper's first page, above its facts */
 .paper-thumb{display:block;width:100%;max-width:400px;margin:0 0 20px}
@@ -91,3 +93,28 @@ a:hover{color:#000}
 .main-col,.side-col{grid-column:1/-1}
 .links{column-gap:18px}
 }
+
+/* Motion. All of it is skipped with reduced motion, and none of it hides anything without JavaScript */
+@media (prefers-reduced-motion:no-preference){
+/* Moving between Home and Projects: the nav stays put while the page fades through */
+@view-transition{navigation:auto}
+.fnav-wrap{view-transition-name:fnav}
+::view-transition-old(root){animation:vt-out .2s ease-in both}
+::view-transition-new(root){animation:vt-in .55s var(--out) .05s both}
+@keyframes vt-out{to{opacity:0}}
+@keyframes vt-in{from{opacity:0;transform:translate3d(0,12px,0)}}
+.pj-h1{animation:rise .9s var(--out) both}
+@keyframes rise{from{opacity:0;transform:translate3d(0,16px,0)}}
+@keyframes dot-ring{from{opacity:.6}to{opacity:0;transform:scale(2.8)}}
+}
+/* Scroll reveals (motion.js): each project rises in as it arrives, its outline fades in, and its dot stays on the line and pulses once */
+@media screen and (prefers-reduced-motion:no-preference){
+.rv-g{outline-color:transparent}
+.rv-g.in{outline-color:var(--edge);transition:outline-color .9s ease}
+.rv-i{opacity:0;transform:translate3d(0,24px,0)}
+.rv-i.in{opacity:1;transform:none;transition:opacity .7s ease var(--rv-d,0s),transform 1s var(--out) var(--rv-d,0s)}
+.rv-i .pj-title .dot{transform:translate3d(0,-24px,0)}
+.rv-i.in .pj-title .dot{transform:none;transition:transform 1s var(--out) var(--rv-d,0s)}
+.rv-i.in .pj-title .dot::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid var(--signal);pointer-events:none;animation:dot-ring .9s var(--out) calc(var(--rv-d,0s) + .3s) both}
+}
+@media (prefers-reduced-motion:reduce){.frame *,.frame *::after{transition:none !important;animation:none !important}}

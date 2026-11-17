@@ -2,7 +2,7 @@
 
 Live at https://maks-mroczkowski.github.io/
 
-Two static pages of HTML, CSS and one small script. Vite builds them and copies them to `dist/` unchanged. There's no framework at runtime and no client-side bundle.
+Two static pages of HTML, CSS and two small scripts. Vite builds them and copies them to `dist/` unchanged. There's no framework at runtime and no client-side bundle.
 
 ## Run it
 
@@ -33,6 +33,7 @@ Before pushing a visual change, check it against "Done when" below.
 | `projects.html` | Projects: "Things I've built" |
 | `public/css/home.css`, `public/css/projects.css` | All styling, one file per page so each page stands alone |
 | `public/js/home.js` | The margin line, its dots, the year labels and the opening animation on Home |
+| `public/js/motion.js` | Scroll reveals on both pages (see "Motion" below) |
 | `public/assets/paper-figure-1a.webp` | Figure 1a from the npj Digital Surgery paper (CC BY 4.0, credited on the page) |
 | `public/assets/paper-first-page.webp` | The paper's first page, shown on Projects |
 
@@ -51,6 +52,8 @@ The CV is at `public/assets/Maks-Mroczkowski-CV.pdf`. To update it, replace that
 
 The #EatABRHack video is Gianni Austin's LinkedIn post. The still (`eatabrhack-still.webp`, the video's cover frame) shows the design's play button, which opens the post on LinkedIn. To play a video inline instead, add `public/assets/eatabrhack.mp4` and turn the play link back into `<button class="play" type="button" data-video-src="assets/eatabrhack.mp4">`; `js/home.js` then swaps in a real player. The chapter's photo row holds two photos, so it uses two columns on desktop. The portrait (`portrait.webp`) is black and white at 4:5, as the design specifies.
 
+Photos on Home (the video still, the #EatABRHack photos and the portrait) sit in `.box` frames with Figure 1a's 12px rounding, and CSS shows them in black and white (`filter` on `.box>img` in `home.css`) so they match the portrait and leave Signal as the page's only colour. On a desktop, hovering a photo brings back its colour. The image files themselves are untouched, so deleting that `filter` restores colour everywhere.
+
 ## Design rules
 
 - **Colours.** Paper `#F2F2F0` (background), Ink `#000` (text), Graphite `#666662` (secondary text), Signal `#E84600` (the line and dots), Track `#D6D6D2` (hairlines, placeholders and the undrawn line), Edge `#B5B5B0` (card borders, 1.5px). No other colours.
@@ -59,6 +62,12 @@ The #EatABRHack video is Gianni Austin's LinkedIn post. The still (`eatabrhack-s
 - **Cards.** Chapters on Home and projects on Projects sit in rounded panels with a 1.5px Edge outline. The line, dots and years stay in the margin and never connect to the panels.
 - **Never add** shadows, gradients, all-caps labels, emoji or big headline numbers. Bold marks a few key phrases only.
 - **Copy** is in British English and final, apart from the marked placeholders.
+- **Motion** is quiet and points at what matters. It uses one easing, `--out` (a fast start that settles slowly), and only moves things by opacity and transform, so nothing shifts the layout. Everything below is switched off with reduced motion, and without JavaScript the page is complete with nothing hidden.
+  - *Between pages:* moving between Home and Projects fades the page through while the nav pill stays put (a cross-document view transition, in Chrome, Edge and Safari 18.2+; other browsers just load the page).
+  - *Scroll reveals* (`motion.js`): each panel that starts below the fold fades its outline in as it arrives, and its contents rise in a beat apart, in reading order. Photos also settle from a slight zoom. Anything on screen at load is left alone. On Home the line's dots and years are never part of a reveal; on Projects each dot stays on the line and pulses once as its project arrives.
+  - *The line:* on Home, a dot pops once, with a single ring, when the line reaches it as you scroll.
+  - *Openings:* Home's intro rises in after the headline; Projects' headline rises in.
+  - *Hovers:* nav underlines fade in and settle into place, link underlines thicken smoothly, and the play button grows slightly.
 
 ## How the margin line works (Home)
 
@@ -66,7 +75,7 @@ The #EatABRHack video is Gianni Austin's LinkedIn post. The still (`eatabrhack-s
 - With JavaScript, the line draws as you scroll. Its tip sits around the middle of the screen, catches up quickly near the top, and speeds up over the last screen so the line is complete when you reach the bottom.
 - Each dot fills, and its year label darkens from Track to Graphite, as the line reaches it.
 - Once per browser session, the small year next to the headline spins from 2023 to 2026 while the line draws down to the first dot.
-- On Projects the line is simply drawn in full, with no script.
+- On Projects the line is simply drawn in full; its only script is the scroll reveals.
 
 ## Done when
 
