@@ -165,9 +165,6 @@ a:hover{color:#000}
 ::view-transition-new(root){animation:vt-in .55s var(--out) .05s both}
 @keyframes vt-out{to{opacity:0}}
 @keyframes vt-in{from{opacity:0;transform:translate3d(0,12px,0)}}
-/* The line's dot, the headline's year and then the intro arrive in that order */
-.intro{animation:rise .9s var(--out) .25s both}
-@keyframes rise{from{opacity:0;transform:translate3d(0,16px,0)}}
 /* A dot pops, with one ring, when the line reaches it (home.js adds .pop) */
 .dot.pop{animation:dot-pop .5s cubic-bezier(.34,1.56,.64,1)}
 .dot.pop::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid var(--signal);pointer-events:none;animation:dot-ring .9s var(--out) both}

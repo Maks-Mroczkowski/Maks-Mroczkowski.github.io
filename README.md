@@ -66,7 +66,7 @@ Photos on Home (the video still, the #EatABRHack photos and the portrait) sit in
   - *Between pages:* moving between Home and Projects fades the page through while the nav pill stays put (a cross-document view transition, in Chrome, Edge and Safari 18.2+; other browsers just load the page).
   - *Scroll reveals* (`motion.js`): each panel that starts below the fold fades its outline in as it arrives, and its contents rise in a beat apart, in reading order. Photos also settle from a slight zoom. Anything on screen at load is left alone. On Home the line's dots and years are never part of a reveal; on Projects each dot stays on the line and pulses once as its project arrives.
   - *The line:* on Home, a dot pops once, with a single ring, when the line reaches it as you scroll.
-  - *Openings:* Home's intro rises in after the headline; Projects' headline rises in.
+  - *Openings:* Projects' headline rises in. Home's opening stays still, apart from the line and the headline's year.
   - *Hovers:* nav underlines fade in and settle into place, link underlines thicken smoothly, and the play button grows slightly.
 
 ## How the margin line works (Home)
