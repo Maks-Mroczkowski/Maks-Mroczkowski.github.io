@@ -103,18 +103,14 @@ a:hover{color:#000}
 ::view-transition-new(root){animation:vt-in .55s var(--out) .05s both}
 @keyframes vt-out{to{opacity:0}}
 @keyframes vt-in{from{opacity:0;transform:translate3d(0,12px,0)}}
-.pj-h1{animation:rise .9s var(--out) both}
-@keyframes rise{from{opacity:0;transform:translate3d(0,16px,0)}}
+/* A project's dot pulses once, with one ring, as its outline starts to draw (motion.js adds .pulse) */
+.dot.pulse::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid var(--signal);pointer-events:none;animation:dot-ring .9s var(--out) both}
 @keyframes dot-ring{from{opacity:.6}to{opacity:0;transform:scale(2.8)}}
 }
-/* Scroll reveals (motion.js): each project rises in as it arrives, its outline fades in, and its dot stays on the line and pulses once */
+/* Outlines that draw themselves (motion.js): while a project's outline is being drawn, its CSS outline is hidden and an SVG stroke in exactly the same place stands in. The text never moves */
 @media screen and (prefers-reduced-motion:no-preference){
-.rv-g{outline-color:transparent}
-.rv-g.in{outline-color:var(--edge);transition:outline-color .9s ease}
-.rv-i{opacity:0;transform:translate3d(0,24px,0)}
-.rv-i.in{opacity:1;transform:none;transition:opacity .7s ease var(--rv-d,0s),transform 1s var(--out) var(--rv-d,0s)}
-.rv-i .pj-title .dot{transform:translate3d(0,-24px,0)}
-.rv-i.in .pj-title .dot{transform:none;transition:transform 1s var(--out) var(--rv-d,0s)}
-.rv-i.in .pj-title .dot::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid var(--signal);pointer-events:none;animation:dot-ring .9s var(--out) calc(var(--rv-d,0s) + .3s) both}
+.rv-g{position:relative;outline-color:transparent}
+.rv-g.rv-done{outline-color:var(--edge);transition:outline-color .25s linear}
+.rv-frame{position:absolute;left:0;top:0;overflow:visible;pointer-events:none;fill:none;stroke:var(--edge);stroke-width:1.5px}
 }
 @media (prefers-reduced-motion:reduce){.frame *,.frame *::after{transition:none !important;animation:none !important}}

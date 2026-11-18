@@ -33,7 +33,7 @@ Before pushing a visual change, check it against "Done when" below.
 | `projects.html` | Projects: "Things I've built" |
 | `public/css/home.css`, `public/css/projects.css` | All styling, one file per page so each page stands alone |
 | `public/js/home.js` | The margin line, its dots, the year labels and the opening animation on Home |
-| `public/js/motion.js` | Scroll reveals on both pages (see "Motion" below) |
+| `public/js/motion.js` | The panel outlines that draw themselves in, on both pages (see "Motion" below) |
 | `public/assets/paper-figure-1a.webp` | Figure 1a from the npj Digital Surgery paper (CC BY 4.0, credited on the page) |
 | `public/assets/paper-first-page.webp` | The paper's first page, shown on Projects |
 
@@ -62,11 +62,10 @@ Photos on Home (the video still, the #EatABRHack photos and the portrait) sit in
 - **Cards.** Chapters on Home and projects on Projects sit in rounded panels with a 1.5px Edge outline. The line, dots and years stay in the margin and never connect to the panels.
 - **Never add** shadows, gradients, all-caps labels, emoji or big headline numbers. Bold marks a few key phrases only.
 - **Copy** is in British English and final, apart from the marked placeholders.
-- **Motion** is quiet and points at what matters. It uses one easing, `--out` (a fast start that settles slowly), and only moves things by opacity and transform, so nothing shifts the layout. Everything below is switched off with reduced motion, and without JavaScript the page is complete with nothing hidden.
+- **Motion** is quiet and points at what matters. Text never animates: it is always there and always still. Nothing shifts the layout. Everything below is switched off with reduced motion, and without JavaScript the page is complete with every outline drawn.
   - *Between pages:* moving between Home and Projects fades the page through while the nav pill stays put (a cross-document view transition, in Chrome, Edge and Safari 18.2+; other browsers just load the page).
-  - *Scroll reveals* (`motion.js`): each panel that starts below the fold fades its outline in as it arrives, and its contents rise in a beat apart, in reading order. Photos also settle from a slight zoom. Anything on screen at load is left alone. On Home the line's dots and years are never part of a reveal; on Projects each dot stays on the line and pulses once as its project arrives.
+  - *Outlines* (`motion.js`): each outlined panel that starts below the fold draws its outline as it comes up the screen. The stroke starts on the panel's left edge, level with its dot (or heading), and wraps round the text both ways to meet on the far side, over about 1.8 seconds. Panels on screen at load are left alone. On Projects each dot pulses once as its outline starts.
   - *The line:* on Home, a dot pops once, with a single ring, when the line reaches it as you scroll.
-  - *Openings:* Projects' headline rises in. Home's opening stays still, apart from the line and the headline's year.
   - *Hovers:* nav underlines fade in and settle into place, link underlines thicken smoothly, and the play button grows slightly.
 
 ## How the margin line works (Home)

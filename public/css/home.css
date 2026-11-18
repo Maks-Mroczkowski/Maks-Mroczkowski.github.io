@@ -171,13 +171,10 @@ a:hover{color:#000}
 @keyframes dot-pop{from{transform:scale(.5)}}
 @keyframes dot-ring{from{opacity:.6}to{opacity:0;transform:scale(2.8)}}
 }
-/* Scroll reveals (motion.js): what starts below the fold rises in as it arrives, a beat apart, and photos settle from a slight zoom. Each panel's outline fades in with it */
+/* Outlines that draw themselves (motion.js): while a panel's outline is being drawn, its CSS outline is hidden and an SVG stroke in exactly the same place stands in. The text never moves */
 @media screen and (prefers-reduced-motion:no-preference){
-[data-story="panels"] .rv-g{outline-color:transparent}
-[data-story="panels"] .rv-g.in{outline-color:var(--edge);transition:outline-color .9s ease}
-.rv-i{opacity:0;transform:translate3d(0,24px,0)}
-.rv-i.in{opacity:1;transform:none;transition:opacity .7s ease var(--rv-d,0s),transform 1s var(--out) var(--rv-d,0s)}
-.rv-i .box>img{transform:scale(1.08)}
-.rv-i.in .box>img{transform:none;transition:transform 1.6s var(--out) var(--rv-d,0s),filter .6s ease}
+[data-story="panels"] .rv-g{position:relative;outline-color:transparent}
+[data-story="panels"] .rv-g.rv-done{outline-color:var(--edge);transition:outline-color .25s linear}
+.rv-frame{position:absolute;left:0;top:0;overflow:visible;pointer-events:none;fill:none;stroke:var(--edge);stroke-width:1.5px}
 }
 @media (prefers-reduced-motion:reduce){.frame *,.frame *::after{transition:none !important;animation:none !important}}
