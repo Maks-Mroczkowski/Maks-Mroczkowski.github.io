@@ -52,7 +52,11 @@ The CV is at `public/assets/Maks-Mroczkowski-CV.pdf`. To update it, replace that
 
 The #EatABRHack video is Gianni Austin's LinkedIn post. The still (`eatabrhack-still.webp`, the video's cover frame) shows the design's play button, which opens the post on LinkedIn. To play a video inline instead, add `public/assets/eatabrhack.mp4` and turn the play link back into `<button class="play" type="button" data-video-src="assets/eatabrhack.mp4">`; `js/home.js` then swaps in a real player. The chapter's photo row holds two photos, so it uses two columns on desktop. The portrait (`portrait.webp`) is black and white at 4:5, as the design specifies.
 
-Photos on Home (the video still, the #EatABRHack photos and the portrait) sit in `.box` frames with Figure 1a's 12px rounding, and CSS shows them in black and white (`filter` on `.box>img` in `home.css`) so they match the portrait and leave Signal as the page's only colour. On a desktop, hovering a photo brings back its colour. The image files themselves are untouched, so deleting that `filter` restores colour everywhere.
+The graduation photo (`graduation.webp`, in "Graduation, and a return offer") is cropped to 3:2 from the original, with its location data removed.
+
+"Shipping while studying" embeds Maks's LinkedIn post about joining Really Good Culture, as LinkedIn's own iframe (`.post` in `home.css`). LinkedIn's post can't tell the page its height, so the frame is set to the card's height: 608px, or 652px when the column is under 350px wide and 690px under 250px. If the post is edited or LinkedIn changes its card, re-measure those. Visitors who haven't answered LinkedIn's cookie prompt see it at the top of the post until they choose. The post loads LinkedIn's scripts and cookies, which costs a few Lighthouse points (performance about 95, best practices 75), still within "Done when".
+
+Photos on Home (the video still, the #EatABRHack photos, the graduation photo and the portrait) sit in `.box` frames with Figure 1a's 12px rounding, and CSS shows them in black and white (`filter` on `.box>img` in `home.css`) so they match the portrait and leave Signal as the page's only colour. On a desktop, hovering a photo brings back its colour. The image files themselves are untouched, so deleting that `filter` restores colour everywhere. The LinkedIn post gets the same black and white, with colour on hover (its own `filter` on `.post iframe`).
 
 ## Design rules
 
@@ -74,7 +78,7 @@ Photos on Home (the video still, the #EatABRHack photos and the portrait) sit in
 - With JavaScript, the line draws as you scroll. Its tip sits around the middle of the screen, catches up quickly near the top, and speeds up over the last screen so the line is complete when you reach the bottom.
 - Each dot fills, and its year label darkens from Track to Graphite, as the line reaches it.
 - Once per browser session, the small year next to the headline spins from 2023 to 2026 while the line draws down to the first dot.
-- On Projects the line is simply drawn in full; its only script is the scroll reveals.
+- On Projects the line is simply drawn in full; its only script draws the panel outlines in.
 
 ## Done when
 

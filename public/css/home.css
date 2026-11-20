@@ -90,6 +90,7 @@ a:hover{color:#000}
 .r169{aspect-ratio:16/9}
 .r11{aspect-ratio:1/1}
 .r45{aspect-ratio:4/5}
+.r32{aspect-ratio:3/2}
 .box>img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08);transition:filter .6s ease,transform .9s var(--out)}
 .box:focus-within>img{filter:none}
 @media (hover:hover){.box:hover>img{filter:none;transform:scale(1.03)}.box:hover .play{transform:scale(1.08)}}
@@ -102,6 +103,16 @@ a:hover{color:#000}
 .photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px;margin:16px 0 0;padding:0;list-style:none}
 .photos figure{margin:0}
 .cap{margin:10px 0 0;font-size:15px;line-height:1.4;color:var(--graphite)}
+/* An embedded LinkedIn post. The frame is cut to the post's own height (LinkedIn's card is 606px tall,
+   650px below 350px wide, 688px below 250px), and it gets the photos' black and white and hover colour */
+.post{position:relative;isolation:isolate;container-type:inline-size}
+.post iframe{display:block;width:100%;height:608px;border:0;filter:grayscale(1) contrast(1.08);transition:filter .6s ease}
+.post:focus-within iframe{filter:none}
+/* A pointer inside another site's frame doesn't always count as hovering this page, so an invisible
+   16px band round the post catches the hover on the way in and holds it while the pointer is inside */
+@media (hover:hover){.post::before{content:"";position:absolute;inset:-16px;z-index:-1}.post:hover iframe{filter:none}}
+@container (max-width:349.98px){.post iframe{height:652px}}
+@container (max-width:249.98px){.post iframe{height:690px}}
 /* A figure from the paper, on its own white like a printed page */
 .paper-fig{display:block;width:100%;height:auto;box-sizing:border-box;border:1px solid var(--track);border-radius:12px;background:#fff}
 
