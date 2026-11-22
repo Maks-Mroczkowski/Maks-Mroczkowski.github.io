@@ -41,9 +41,7 @@ Anything in `public/` is served at the site root, so `public/assets/x` is linked
 
 ## Still to add
 
-Placeholders show as grey highlights (`<mark class="todo">`) or grey boxes.
-
-1. **The rest of the "Where I am now" sentence.**
+All the copy placeholders are filled. If a new one is needed, mark it with `<mark class="todo">`, which shows as a grey highlight (the style is still in `home.css`).
 
 Nice to have: a favicon and a social preview image (`og:image`).
 
@@ -68,7 +66,7 @@ Figure 1a has no frame of its own. `mix-blend-mode: multiply` on `.paper-fig` pr
 - **Layout.** Everything is sized from the page width using a CSS container query on `.site`. Below 1024px wide, the phone layout takes over. The layout variables sit at the top of each CSS file (`--text-x`, `--line-x`, `--story-shift`, `--pn-x` and so on).
 - **Cards.** Chapters on Home and projects on Projects sit in rounded panels with a 1.5px Edge outline. The line, dots and years stay in the margin and never connect to the panels.
 - **Never add** shadows, gradients, all-caps labels, emoji or big headline numbers. Bold marks a few key phrases only.
-- **Copy** is in British English and final, apart from the marked placeholders.
+- **Copy** is in British English and final.
 - **Motion** is quiet and points at what matters. Text never animates: it is always there and always still. Nothing shifts the layout. Everything below is switched off with reduced motion, and without JavaScript the page is complete with every outline drawn.
   - *Between pages:* moving between Home and Projects fades the page through while the nav pill stays put (a cross-document view transition, in Chrome, Edge and Safari 18.2+; other browsers just load the page).
   - *Outlines* (`motion.js`): each outlined panel that starts below the fold draws its outline as it comes up the screen. The stroke starts on the panel's left edge, level with its dot (or heading), and wraps round the text both ways to meet on the far side, over about 1.8 seconds. Panels on screen at load are left alone. On Projects each dot pulses once as its outline starts.
