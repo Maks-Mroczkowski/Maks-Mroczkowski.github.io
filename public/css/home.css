@@ -114,15 +114,12 @@ a:hover{color:#000}
 .photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px;margin:16px 0 0;padding:0;list-style:none}
 .photos figure{margin:0}
 .cap{margin:10px 0 0;font-size:15px;line-height:1.4;color:var(--graphite)}
-/* A LinkedIn post shown as its two photos and a caption, all one link to the post. The photos share a height
-   at their own shapes: the columns are in proportion to their aspect ratios (4:5 and 4:3 make 3fr to 5fr).
-   Hovering anywhere on it zooms both photos and thickens the "View on LinkedIn" underline. */
-.post-link{display:block;text-decoration:none}
-.frame a.post-link:focus-visible{border-radius:15px}
-.post-photos{display:grid;grid-template-columns:3fr 5fr;column-gap:16px}
-.r43{aspect-ratio:4/3}
-.post-link .u{color:var(--ink);white-space:nowrap}
-@media (hover:hover){.post-link:hover .box>img{transform:scale(1.03)}.post-link:hover .u{text-decoration-thickness:2px}}
+/* An embedded LinkedIn post. The frame is cut to the post's own height (LinkedIn's card is 606px tall,
+   650px below 350px wide, 688px below 250px) */
+.post{container-type:inline-size}
+.post iframe{display:block;width:100%;height:608px;border:0}
+@container (max-width:349.98px){.post iframe{height:652px}}
+@container (max-width:249.98px){.post iframe{height:690px}}
 /* A figure from the paper, printed straight onto the card: multiply turns its white background into the card's Paper,
    and leaves its lines, text and coloured boxes as they are */
 .paper-fig{display:block;width:100%;height:auto;mix-blend-mode:multiply}
@@ -171,7 +168,6 @@ a:hover{color:#000}
 .photos{display:flex;column-gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-right:calc(-1 * var(--pad-r));padding-right:var(--pad-r);scrollbar-width:none}
 .photos::-webkit-scrollbar{display:none}
 .photos>li{flex:0 0 72%;scroll-snap-align:start}
-.post-photos{column-gap:12px}
 .links{column-gap:18px}
 .frame[data-story="panels"]{--pn-x:16px;--pn-y:24px;--pn-r:20px}
 [data-story="panels"] .ch{--ch-px:0px;margin-left:0;margin-right:-6px}
