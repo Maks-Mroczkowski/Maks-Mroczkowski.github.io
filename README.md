@@ -43,8 +43,7 @@ Anything in `public/` is served at the site root, so `public/assets/x` is linked
 
 Placeholders show as grey highlights (`<mark class="todo">`) or grey boxes.
 
-1. **One line on what Maks looked for as a judge** (Home, "The other side of the table").
-2. **The rest of the "Where I am now" sentence.**
+1. **The rest of the "Where I am now" sentence.**
 
 Nice to have: a favicon and a social preview image (`og:image`).
 
