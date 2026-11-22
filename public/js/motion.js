@@ -13,11 +13,6 @@
     the dots belong to the line (home.js) and are left alone.
   - Panels already on screen at load are left alone. Without JavaScript, or
     with reduced motion, every outline simply shows.
-
-  Photos (and the LinkedIn post) on Home that start below the fold wait in
-  black and white (.rv-c) and come into colour as they scroll up into view.
-  A .box marked .colour is always in colour. Without JavaScript, or with
-  reduced motion, every photo is simply in colour.
 */
 (function () {
   'use strict';
@@ -26,8 +21,6 @@
   var DRAW_MS = 1800;
   var EASE = 'cubic-bezier(.55,0,.25,1)'; // eases in from the dot, glides round, settles where the two ends meet
   var TRIGGER = '0px 0px -40% 0px';       // start once the panel's top is 60% of the way up the screen
-  var PHOTOS = '.box:not(.colour), .post';
-  var COLOUR_TRIGGER = '0px 0px -35% 0px'; // a photo colours in once its top is about a third of the way up
   var NS = 'http://www.w3.org/2000/svg';
 
   var reduced = false;
@@ -124,21 +117,5 @@
     if (panel.getBoundingClientRect().top < fold) return;
     panel.classList.add('rv-g');
     io.observe(panel);
-  });
-
-  // Photos: black and white until they come into view, then colour (the CSS transition does the fade).
-  var cio = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (!e.isIntersecting) return;
-      cio.unobserve(e.target);
-      e.target.classList.remove('rv-c');
-    });
-  }, { rootMargin: COLOUR_TRIGGER });
-
-  Array.prototype.forEach.call(document.querySelectorAll(PHOTOS), function (el) {
-    if (!el.querySelector('img, iframe')) return;
-    if (el.getBoundingClientRect().top < fold) return;
-    el.classList.add('rv-c');
-    cio.observe(el);
   });
 })();

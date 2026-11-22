@@ -83,8 +83,7 @@ a:hover{color:#000}
 .u:hover{text-decoration-thickness:2px}
 .todo{background:var(--track);color:var(--ink);padding:0.04em 0.2em;border-radius:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 
-/* Media: photos share a 12px rounding. With JavaScript, they wait in black and white and come into colour as
-   they scroll into view (motion.js adds .rv-c, then takes it away); a .box marked .colour is left in colour */
+/* Media: photos share a 12px rounding and show in their own colours (the portrait's file is black and white) */
 .media{margin:clamp(28px,2.8cqw,40px) 0 0;padding:0}
 .box{position:relative;overflow:hidden;isolation:isolate;border-radius:12px;background:var(--track)}
 .box-label{position:absolute;left:12px;top:10px;right:12px;font-size:13px;line-height:1.3;font-weight:500;color:var(--ink)}
@@ -104,8 +103,7 @@ a:hover{color:#000}
 .with-video>.media{grid-column:2;grid-row:1/-1;margin:0;align-self:start}
 .with-video .play{width:64px;height:64px;margin:-32px 0 0 -32px}
 .with-video .play svg{width:20px;height:20px;margin-left:3px}
-.box>img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;transition:filter 1.4s ease,transform .9s var(--out)}
-.box.rv-c>img,.post.rv-c iframe{filter:grayscale(1) contrast(1.08)}
+.box>img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;transition:transform .9s var(--out)}
 @media (hover:hover){.box:hover>img{transform:scale(1.03)}.box:hover .play{transform:scale(1.08)}}
 .play{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;padding:0;border:0;border-radius:50%;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .35s var(--out)}
 .play:focus-visible{transform:scale(1.08)}
@@ -117,9 +115,9 @@ a:hover{color:#000}
 .photos figure{margin:0}
 .cap{margin:10px 0 0;font-size:15px;line-height:1.4;color:var(--graphite)}
 /* An embedded LinkedIn post. The frame is cut to the post's own height (LinkedIn's card is 606px tall,
-   650px below 350px wide, 688px below 250px), and it comes into colour on scroll like the photos */
+   650px below 350px wide, 688px below 250px) */
 .post{container-type:inline-size}
-.post iframe{display:block;width:100%;height:608px;border:0;transition:filter 1.4s ease}
+.post iframe{display:block;width:100%;height:608px;border:0}
 @container (max-width:349.98px){.post iframe{height:652px}}
 @container (max-width:249.98px){.post iframe{height:690px}}
 /* A figure from the paper, printed straight onto the card: multiply turns its white background into the card's Paper,

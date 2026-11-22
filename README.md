@@ -33,7 +33,7 @@ Before pushing a visual change, check it against "Done when" below.
 | `projects.html` | Projects: "Things I've built" |
 | `public/css/home.css`, `public/css/projects.css` | All styling, one file per page so each page stands alone |
 | `public/js/home.js` | The margin line, its dots, the year labels and the opening animation on Home, plus the inline video player |
-| `public/js/motion.js` | The panel outlines that draw themselves in, on both pages, and the photos coming into colour on Home (see "Motion" below) |
+| `public/js/motion.js` | The panel outlines that draw themselves in, on both pages (see "Motion" below) |
 | `public/assets/paper-figure-1a.webp` | Figure 1a from the npj Digital Surgery paper (CC BY 4.0, credited on the page) |
 | `public/assets/paper-first-page.webp` | The paper's first page, shown on Projects |
 
@@ -58,7 +58,7 @@ The graduation photo (`graduation.webp`, in "Graduation, and a return offer") is
 
 "Shipping while studying" embeds Maks's LinkedIn post about joining Really Good Culture, as LinkedIn's own iframe (`.post` in `home.css`). LinkedIn's post can't tell the page its height, so the frame is set to the card's height: 608px, or 652px when the column is under 350px wide and 690px under 250px. If the post is edited or LinkedIn changes its card, re-measure those. Visitors who haven't answered LinkedIn's cookie prompt see it at the top of the post until they choose. The post loads LinkedIn's scripts and cookies, which costs a few Lighthouse points (performance about 95, best practices 75), still within "Done when".
 
-Photos on Home (the two video stills, the Purdue photo, the #EatABRHack photos, the graduation photo and the portrait) sit in `.box` frames with 12px rounding. Photos below the fold wait in black and white and come into colour as they scroll into view (see "Motion" below); the LinkedIn post does the same. `motion.js` adds `.rv-c` and takes it away, and the `filter` rule for `.rv-c` is in `home.css`. Without JavaScript, or with reduced motion, every photo is simply in colour. The image files themselves are in colour, apart from the portrait, which is black and white. Adding `colour` to a `.box` keeps that one in colour from the start; the first-project still and the Purdue photo use it, at Maks's request.
+Photos on Home (the two video stills, the Purdue photo, the #EatABRHack photos, the graduation photo and the portrait) sit in `.box` frames with 12px rounding and show in their own colours, as does the LinkedIn post. The only black-and-white image is the portrait, and that's the file itself, not CSS, so a new portrait would need to be black and white already.
 
 Figure 1a has no frame of its own. `mix-blend-mode: multiply` on `.paper-fig` prints it straight onto the card: its white background takes on the card's Paper colour, while its lines, text and coloured boxes stay as they are. The white margins round the diagram are trimmed from the file (1350×598), so it lines up with the text. The credit line is unchanged; "cropped" still describes it.
 
@@ -73,7 +73,6 @@ Figure 1a has no frame of its own. `mix-blend-mode: multiply` on `.paper-fig` pr
 - **Motion** is quiet and points at what matters. Text never animates: it is always there and always still. Nothing shifts the layout. Everything below is switched off with reduced motion, and without JavaScript the page is complete with every outline drawn.
   - *Between pages:* moving between Home and Projects fades the page through while the nav pill stays put (a cross-document view transition, in Chrome, Edge and Safari 18.2+; other browsers just load the page).
   - *Outlines* (`motion.js`): each outlined panel that starts below the fold draws its outline as it comes up the screen. The stroke starts on the panel's left edge, level with its dot (or heading), and wraps round the text both ways to meet on the far side, over about 1.8 seconds. Panels on screen at load are left alone. On Projects each dot pulses once as its outline starts.
-  - *Photos* (`motion.js`): on Home, each photo (and the LinkedIn post) that starts below the fold waits in black and white, then fades into colour over about 1.4 seconds once its top is about a third of the way up the screen.
   - *The line:* on Home, a dot pops once, with a single ring, when the line reaches it as you scroll.
   - *Hovers:* nav underlines fade in and settle into place, link underlines thicken smoothly, photos zoom in very slightly, and the play button grows slightly.
 
