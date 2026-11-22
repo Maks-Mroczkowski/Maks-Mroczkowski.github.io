@@ -91,6 +91,9 @@ a:hover{color:#000}
 .r11{aspect-ratio:1/1}
 .r45{aspect-ratio:4/5}
 .r32{aspect-ratio:3/2}
+.r916{aspect-ratio:9/16}
+/* A portrait video's frame is as wide as one photo in a two-photo row; its caption keeps the full width */
+.tall>.box{width:calc(50% - 8px)}
 .box>img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08);transition:filter .6s ease,transform .9s var(--out)}
 .box:focus-within>img{filter:none}
 @media (hover:hover){.box:hover>img{filter:none;transform:scale(1.03)}.box:hover .play{transform:scale(1.08)}}
@@ -159,6 +162,7 @@ a:hover{color:#000}
 .photos{display:flex;column-gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-right:calc(-1 * var(--pad-r));padding-right:var(--pad-r);scrollbar-width:none}
 .photos::-webkit-scrollbar{display:none}
 .photos>li{flex:0 0 72%;scroll-snap-align:start}
+.tall>.box{width:72%}
 .links{column-gap:18px}
 .frame[data-story="panels"]{--pn-x:16px;--pn-y:24px;--pn-r:20px}
 [data-story="panels"] .ch{--ch-px:0px;margin-left:0;margin-right:-6px}

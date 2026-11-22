@@ -213,18 +213,20 @@
   if (window.ResizeObserver) new ResizeObserver(onResize).observe(site);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(onResize);
 
-  // #EatABRHack video: the still frame and play button stand in until the file exists.
-  // Put the video at assets/eatabrhack.mp4 and the button swaps in a real player.
+  // Videos on the page: a still frame with a play link (.play[data-video-src]) stands in, so
+  // nothing loads until it's wanted. Clicking swaps in a real player in the same frame. The
+  // link points at the file too, so without JavaScript it simply opens the video.
   Array.prototype.forEach.call(site.querySelectorAll('.play[data-video-src]'), function (btn) {
-    btn.addEventListener('click', function () {
+    btn.addEventListener('click', function (e) {
       var box = btn.closest('.box');
       if (!box) return;
+      e.preventDefault();
       var v = document.createElement('video');
       v.src = btn.getAttribute('data-video-src');
       v.controls = true;
       v.autoplay = true;
       v.playsInline = true;
-      v.setAttribute('aria-label', '#EatABRHack video');
+      v.setAttribute('aria-label', btn.getAttribute('data-video-label') || 'Video');
       v.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000';
       box.innerHTML = '';
       box.appendChild(v);

@@ -32,7 +32,7 @@ Before pushing a visual change, check it against "Done when" below.
 | `index.html` | Home: Maks's story, told along an orange line in the left margin |
 | `projects.html` | Projects: "Things I've built" |
 | `public/css/home.css`, `public/css/projects.css` | All styling, one file per page so each page stands alone |
-| `public/js/home.js` | The margin line, its dots, the year labels and the opening animation on Home |
+| `public/js/home.js` | The margin line, its dots, the year labels and the opening animation on Home, plus the inline video player |
 | `public/js/motion.js` | The panel outlines that draw themselves in, on both pages (see "Motion" below) |
 | `public/assets/paper-figure-1a.webp` | Figure 1a from the npj Digital Surgery paper (CC BY 4.0, credited on the page) |
 | `public/assets/paper-first-page.webp` | The paper's first page, shown on Projects |
@@ -50,13 +50,15 @@ Nice to have: a favicon and a social preview image (`og:image`).
 
 The CV is at `public/assets/Maks-Mroczkowski-CV.pdf`. To update it, replace that file and keep the name, since the nav's "CV" link and "Download CV (PDF)" on both pages point there.
 
-The #EatABRHack video is Gianni Austin's LinkedIn post. The still (`eatabrhack-still.webp`, the video's cover frame) shows the design's play button, which opens the post on LinkedIn. To play a video inline instead, add `public/assets/eatabrhack.mp4` and turn the play link back into `<button class="play" type="button" data-video-src="assets/eatabrhack.mp4">`; `js/home.js` then swaps in a real player. The chapter's photo row holds two photos, so it uses two columns on desktop. The portrait (`portrait.webp`) is black and white at 4:5, as the design specifies.
+The #EatABRHack video is Gianni Austin's LinkedIn post. The still (`eatabrhack-still.webp`, the video's cover frame) shows the design's play button, which opens the post on LinkedIn. To play a video inline instead, do what "Starting from zero" does: point the play link's `href` and `data-video-src` at an mp4 in `assets/` and give it a `data-video-label`. `js/home.js` then swaps in a real player when it's clicked, and without JavaScript the link just opens the file. The chapter's photo row holds two photos, so it uses two columns on desktop. The portrait (`portrait.webp`) is black and white at 4:5, as the design specifies.
 
 The graduation photo (`graduation.webp`, in "Graduation, and a return offer") is cropped to 3:2 from the original, with its location data removed.
 
+"Starting from zero" has the video of Maks's first project with code (`first-project.mp4`, 33 seconds). It was converted from the iPhone's HDR original to standard H.264 at 720×1280 (about 5 MB), with its location data removed. It sits behind a still (`first-project-still.webp`) with the design's play button, so the file only downloads when someone presses play. Portrait videos use `.tall`, which makes the frame as wide as one photo in a two-photo row. "Testing frontier AI models, and a publication" has the photo of Maks presenting at Purdue's undergraduate research symposium (`purdue-symposium.webp`, 3:2), under Figure 1a.
+
 "Shipping while studying" embeds Maks's LinkedIn post about joining Really Good Culture, as LinkedIn's own iframe (`.post` in `home.css`). LinkedIn's post can't tell the page its height, so the frame is set to the card's height: 608px, or 652px when the column is under 350px wide and 690px under 250px. If the post is edited or LinkedIn changes its card, re-measure those. Visitors who haven't answered LinkedIn's cookie prompt see it at the top of the post until they choose. The post loads LinkedIn's scripts and cookies, which costs a few Lighthouse points (performance about 95, best practices 75), still within "Done when".
 
-Photos on Home (the video still, the #EatABRHack photos, the graduation photo and the portrait) sit in `.box` frames with Figure 1a's 12px rounding, and CSS shows them in black and white (`filter` on `.box>img` in `home.css`) so they match the portrait and leave Signal as the page's only colour. On a desktop, hovering a photo brings back its colour. The image files themselves are untouched, so deleting that `filter` restores colour everywhere. The LinkedIn post gets the same black and white, with colour on hover (its own `filter` on `.post iframe`).
+Photos on Home (the two video stills, the Purdue photo, the #EatABRHack photos, the graduation photo and the portrait) sit in `.box` frames with Figure 1a's 12px rounding, and CSS shows them in black and white (`filter` on `.box>img` in `home.css`) so they match the portrait and leave Signal as the page's only colour. On a desktop, hovering a photo brings back its colour. The image files themselves are untouched, so deleting that `filter` restores colour everywhere. The LinkedIn post gets the same black and white, with colour on hover (its own `filter` on `.post iframe`).
 
 ## Design rules
 
