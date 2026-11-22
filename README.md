@@ -47,7 +47,7 @@ Nice to have: a favicon and a social preview image (`og:image`).
 
 The CV is at `public/assets/Maks-Mroczkowski-CV.pdf`. To update it, replace that file and keep the name, since the nav's "CV" link and "Download CV (PDF)" on both pages point there.
 
-The #EatABRHack video is Gianni Austin's LinkedIn post. The still (`eatabrhack-still.webp`, the video's cover frame) shows the design's play button, which opens the post on LinkedIn. To play a video inline instead, do what "Starting from zero" does: point the play link's `href` and `data-video-src` at an mp4 in `assets/` and give it a `data-video-label`. `js/home.js` then swaps in a real player when it's clicked, and without JavaScript the link just opens the file. The chapter's photo row holds two photos, so it uses two columns on desktop. The portrait (`portrait.webp`) is black and white at 4:5, as the design specifies.
+The #EatHack video is Gianni Austin's LinkedIn post. The still (`eatabrhack-still.webp`, the video's cover frame) shows the design's play button, which opens the post on LinkedIn. To play a video inline instead, do what "Starting from zero" does: point the play link's `href` and `data-video-src` at an mp4 in `assets/` and give it a `data-video-label`. `js/home.js` then swaps in a real player when it's clicked, and without JavaScript the link just opens the file. The chapter's photo row holds two photos, so it uses two columns on desktop. The portrait (`portrait.webp`) is black and white at 4:5, as the design specifies.
 
 The graduation photo (`graduation.webp`, in "Graduation, and a return offer") is cropped to 3:2 from the original, with its location data removed.
 
@@ -55,7 +55,7 @@ The graduation photo (`graduation.webp`, in "Graduation, and a return offer") is
 
 "Shipping while studying" embeds Maks's LinkedIn post about joining Really Good Culture, as LinkedIn's own iframe (`.post` in `home.css`). LinkedIn's post can't tell the page its height, so the frame is set to the card's height: 608px, or 652px when the column is under 350px wide and 690px under 250px. If the post is edited or LinkedIn changes its card, re-measure those. Visitors who haven't answered LinkedIn's cookie prompt see it at the top of the post until they choose. The post loads LinkedIn's scripts and cookies, which costs a few Lighthouse points (performance about 95, best practices 75), still within "Done when".
 
-Photos on Home (the two video stills, the Purdue photo, the #EatABRHack photos, the graduation photo and the portrait) sit in `.box` frames with 12px rounding and show in their own colours, as does the LinkedIn post. The only black-and-white image is the portrait, and that's the file itself, not CSS, so a new portrait would need to be black and white already.
+Photos on Home (the two video stills, the Purdue photo, the #EatHack photos, the graduation photo and the portrait) sit in `.box` frames with 12px rounding and show in their own colours, as does the LinkedIn post. The only black-and-white image is the portrait, and that's the file itself, not CSS, so a new portrait would need to be black and white already.
 
 Figure 1a has no frame of its own. `mix-blend-mode: multiply` on `.paper-fig` prints it straight onto the card: its white background takes on the card's Paper colour, while its lines, text and coloured boxes stay as they are. The white margins round the diagram are trimmed from the file (1350×598), so it lines up with the text. The credit line is unchanged; "cropped" still describes it.
 
