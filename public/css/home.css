@@ -92,15 +92,17 @@ a:hover{color:#000}
 .r45{aspect-ratio:4/5}
 .r32{aspect-ratio:3/2}
 .r916{aspect-ratio:9/16}
-/* A chapter with a portrait video: the video stands beside the heading and text, top-aligned with the
-   date, and its caption sits under the text. The last row soaks up the video's extra height, so the
-   text rows stay together. On narrow phones the card stacks and the video runs the full width. */
-.with-video{display:grid;grid-template-columns:minmax(0,1fr) 32%;grid-template-rows:auto auto auto 1fr;column-gap:clamp(24px,3cqw,44px);align-items:start}
-.with-video>.ch-head,.with-video>.txt,.with-video>.cap{grid-column:1}
-.with-video>.media{grid-column:2;grid-row:1/-1;margin:0}
-.with-video>.cap{margin-top:clamp(16px,1.7cqw,24px)}
-.with-video .play{width:56px;height:56px;margin:-28px 0 0 -28px}
-.with-video .play svg{width:18px;height:18px;margin-left:3px}
+/* A chapter with a portrait video: the video stands beside the heading and text, its top level with
+   the date, and its caption sits at the foot of the text column, level with the video's bottom edge.
+   The third row soaks up the video's extra height. On narrow phones the card stacks and the video
+   runs the full width. */
+.with-video{display:grid;grid-template-columns:minmax(0,1fr) 42%;grid-template-rows:auto auto 1fr auto;column-gap:clamp(24px,2.8cqw,40px)}
+.with-video>.ch-head{grid-column:1;grid-row:1}
+.with-video>.txt{grid-column:1;grid-row:2}
+.with-video>.cap{grid-column:1;grid-row:4;margin-top:clamp(16px,1.7cqw,24px)}
+.with-video>.media{grid-column:2;grid-row:1/-1;margin:0;align-self:start}
+.with-video .play{width:64px;height:64px;margin:-32px 0 0 -32px}
+.with-video .play svg{width:20px;height:20px;margin-left:3px}
 .box>img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08);transition:filter .6s ease,transform .9s var(--out)}
 .box:focus-within>img,.box.colour>img{filter:none}
 @media (hover:hover){.box:hover>img{filter:none;transform:scale(1.03)}.box:hover .play{transform:scale(1.08)}}
