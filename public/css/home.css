@@ -125,8 +125,10 @@ a:hover{color:#000}
 @media (hover:hover){.post::before{content:"";position:absolute;inset:-16px;z-index:-1}.post:hover iframe{filter:none}}
 @container (max-width:349.98px){.post iframe{height:652px}}
 @container (max-width:249.98px){.post iframe{height:690px}}
-/* A figure from the paper, on its own white like a printed page */
-.paper-fig{display:block;width:100%;height:auto;box-sizing:border-box;border:1px solid var(--track);border-radius:12px;background:#fff}
+/* A figure from the paper, printed straight onto the card: multiply turns its white background into the card's Paper,
+   and leaves its lines, text and coloured boxes as they are */
+.paper-fig{display:block;width:100%;height:auto;mix-blend-mode:multiply}
+.paper-fig+.cap{margin-top:16px}
 
 /* Where I am now */
 .now{margin-top:clamp(140px,15.3cqw,220px);row-gap:28px}
